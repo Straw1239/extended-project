@@ -103,7 +103,7 @@ public final class Engine
 		while(all.hasNext())
 		{
 			Body next = all.next();
-			next.update(state);
+			next.update(state, 1.0);
 			if(next.isDestroyed())
 			{
 				all.remove();

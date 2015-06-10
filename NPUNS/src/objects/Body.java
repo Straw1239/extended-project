@@ -32,10 +32,15 @@ public abstract class Body implements ReadableBody
 		this.mass = mass;
 	}
 	
-	public void update(State d)
+	public void update(State s, double dt)
 	{
-		 x += dx;
-		 y += dy;
+		 x += dx * dt;
+		 y += dy * dt;
+	}
+	
+	public double mass()
+	{
+		return mass;
 	}
 	
 	public boolean collidesWith(Body entity)
@@ -96,7 +101,7 @@ public abstract class Body implements ReadableBody
 			public void draw(GraphicsContext g){}
 
 			@Override
-			public void update(State d){}
+			public void update(State d, double dt){}
 
 			@Override
 			public boolean collidesWith(Body entity)
