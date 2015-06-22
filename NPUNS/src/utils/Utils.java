@@ -144,7 +144,7 @@ public class Utils
 	 */
 	public static boolean circleCollide(Locatable g1, Locatable g2, double radius)
 	{
-		return distanceSquared(g1,g2) < radius * radius;
+		return distanceSquared(g1, g2) < radius * radius;
 	}
 	
 	public static double angle(ReadableBody g1, ReadableBody g2)
@@ -156,7 +156,7 @@ public class Utils
 	
 	public static boolean isInRange(double value, double min, double max)
 	{
-		return (value >= min) && (value <= max);
+		return (value >= min) & (value <= max);
 	}
 	
 	public static double clamp(double value, double min, double max)
