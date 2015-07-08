@@ -64,8 +64,8 @@ public class Main extends Application
 		g.setLineWidth(1);
 		zoom();
 		g.setStroke(Color.GREEN);
-		DoubleBinaryOperator f = (x, y) -> -y*y;
-		int steps = 1 << 10;
+		DoubleBinaryOperator f = (x, y) ->  x*x*x*exp(-y*y);
+		int steps = 1 << 8;
 		double dist = 40;
 		double stepSize = 1.0 / steps;
 		double minDist = .1;
