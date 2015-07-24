@@ -23,7 +23,9 @@ import static main.Utils.exec;
 
 public class Main extends Application
 {
+
 	final double width = 1920, height = 1080;
+
 	
 	Canvas canvas = new Canvas(width, height);
 	GraphicsContext g = canvas.getGraphicsContext2D();
@@ -65,9 +67,12 @@ public class Main extends Application
 		g.setLineWidth(1);
 		zoom();
 		g.setStroke(Color.GREEN);
-		DoubleBinaryOperator f = (x, y) -> -2*x*y;
+
+
+		DoubleBinaryOperator f = (x, y) ->  x*x*x*exp(-y*y);
 		int steps = 1 << 8;
-		double dist = 20;
+		double dist = 40;
+
 		double stepSize = 1.0 / steps;
 		double minDist = 0.1;
 		
