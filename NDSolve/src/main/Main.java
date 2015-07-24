@@ -20,9 +20,10 @@ import javafx.stage.Stage;
 import static java.lang.Math.*;
 import static main.Utils.compute;
 import static main.Utils.exec;
+
 public class Main extends Application
 {
-	final double width = 1440, height = 900;
+	final double width = 1920, height = 1080;
 	
 	Canvas canvas = new Canvas(width, height);
 	GraphicsContext g = canvas.getGraphicsContext2D();
@@ -50,7 +51,7 @@ public class Main extends Application
 		});
 		stage.addEventFilter(ScrollEvent.SCROLL, e -> 
 		{
-			double scale = exp(e.getDeltaY() / 100);
+			double scale = exp(e.getDeltaY() / 1000);
 			zoomX *= scale;
 			zoomY *= scale;
 			clear();
@@ -64,15 +65,15 @@ public class Main extends Application
 		g.setLineWidth(1);
 		zoom();
 		g.setStroke(Color.GREEN);
-		DoubleBinaryOperator f = (x, y) -> x - y;
-		int steps = 1 << 10;
-		double dist = 40;
+		DoubleBinaryOperator f = (x, y) -> -2*x*y;
+		int steps = 1 << 8;
+		double dist = 20;
 		double stepSize = 1.0 / steps;
-		double minDist = .1;
+		double minDist = 0.1;
 		
 		stage.show();
 		
-		double min = -20, max = 20, ysep = 0.5;
+		double min = -20, max = 20, ysep = .5;
 		int curves = (int) ((Math.round((max - min) / ysep)) + 1) * 2;
 		
 		xcoords = new double[curves][];
@@ -103,7 +104,7 @@ public class Main extends Application
 		g.setStroke(Color.GREEN);
 		for(int i = 0; i < xcoords.length; i++)
 		{
-			g.strokePolyline(xcoords[i], ycoords[i], xcoords[i].length - 1);
+			g.strokePolyline(xcoords[i], ycoords[i], xcoords[i].length);
 		}
 	}
 	
@@ -154,8 +155,8 @@ public class Main extends Application
 				}
 			}
 		}
-		xcoords = Arrays.copyOf(xcoords, index + 1);
-		ycoords = Arrays.copyOf(ycoords, index + 1);
+		xcoords = Arrays.copyOf(xcoords, index );
+		ycoords = Arrays.copyOf(ycoords, index );
 		return new double[][]{xcoords, ycoords};
 	}
 
