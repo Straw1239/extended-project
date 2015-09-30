@@ -1,5 +1,6 @@
 package objects;
 
+import fields.Field;
 import utils.Vector;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
@@ -37,6 +38,12 @@ public abstract class Particle extends Body
 			{
 				g.setFill(color);
 				g.fillOval(x - radius, y - radius, radius * 2, radius * 2);
+			}
+
+			@Override
+			public Field[] getFields()
+			{
+				return new Field[0];
 			}
 		};
 	}

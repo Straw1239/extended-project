@@ -43,6 +43,11 @@ public abstract class Body implements ReadableBody
 		return mass;
 	}
 	
+	public double charge()
+	{
+		return 0;
+	}
+	
 	public boolean collidesWith(Body entity)
 	{
 		return bounds().intersects(entity.bounds());
@@ -242,6 +247,29 @@ public abstract class Body implements ReadableBody
 		Impact forObj = other.collideWith(obj);
 		other.hitBy(forOther);
 		obj.hitBy(forObj);
+	}
+	
+	public double getXV()
+	{
+		return dx;
+	}
+	
+	public double getYV()
+	{
+		return dy;
+	}
+
+	public void setVelocity(double xv, double yv)
+	{
+		dx = xv;
+		dy = yv;
+	}
+
+	public void setPosition(double x, double y)
+	{
+		this.x = x;
+		this.y = y;
+		
 	}
 	
 	

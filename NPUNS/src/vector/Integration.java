@@ -4,7 +4,7 @@ import java.util.function.DoubleBinaryOperator;
 
 public class Integration
 {
-	double[] orbitalRK4(DoubleBinaryOperator xa, DoubleBinaryOperator ya, double x, double y, double xv, double yv, double h, double[] data)
+	public static double[] orbitalRK4(DoubleBinaryOperator xa, DoubleBinaryOperator ya, double x, double y, double xv, double yv, double h, double[] data)
 	{
 		double hs = h / 2;
 		double xvk1 = xa.applyAsDouble(x, y);
