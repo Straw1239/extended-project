@@ -7,7 +7,7 @@ package objects;
  */
 public interface Velocity 
 {
-	public double getDX();
+	public double getXV();
 	
-	public double getDY();
+	public double getYV();
 }
