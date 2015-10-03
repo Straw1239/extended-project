@@ -69,9 +69,9 @@ public class Main extends Application
 		g.setStroke(Color.GREEN);
 
 
-		DoubleBinaryOperator f = (x, y) ->  x*x*x*exp(-y*y);
+		DoubleBinaryOperator f = (x, y) ->  x*x*x + 6*x*y -24*y ;
 		int steps = 1 << 8;
-		double dist = 40;
+		double dist = 80;
 
 		double stepSize = 1.0 / steps;
 		double minDist = 0.1;

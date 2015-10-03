@@ -6,26 +6,26 @@ import static java.lang.Math.*;
 public class Integration
 {
 	
-	public static void main(String[] args)
-	{
-		DoubleBinaryOperator f = (x, y) -> sqrt(1 -x*x);
-		double startX = 0;
-		double startY = 0;
-		Cursor c = adaptiveRKC45Path(f, startX, startY, 1.0 / (1 << 20), 1.0 / (1L << 30));
-	
-		PointIterator p1 = RK4Path(f, startX, startY, 1.0 / (1 << 25));
-		double end = 1;
-		long a = System.nanoTime();
-		c.moveX(end - startX);
-		System.out.println("Adaptive:" + (System.nanoTime() - a) / (1_000_000_000.0));
-		a = System.nanoTime();
-		while(p1.getX() < end) p1.advance();
-		System.out.println("Fixed:" + (System.nanoTime() - a) / (1_000_000_000.0));
-		double expected = PI / 4;
-		//System.out.println(c.getY());
-		System.out.println(c.getY() / expected - 1);
-		System.out.println(p1.getY() / expected - 1);
-	}
+//	public static void main(String[] args)
+//	{
+//		DoubleBinaryOperator f = (x, y) -> sqrt(1 -x*x);
+//		double startX = 0;
+//		double startY = 0;
+//		Cursor c = adaptiveRKC45Path(f, startX, startY, 1.0 / (1 << 20), 1.0 / (1L << 30));
+//	
+//		PointIterator p1 = RK4Path(f, startX, startY, 1.0 / (1 << 25));
+//		double end = 1;
+//		long a = System.nanoTime();
+//		c.moveX(end - startX);
+//		System.out.println("Adaptive:" + (System.nanoTime() - a) / (1_000_000_000.0));
+//		a = System.nanoTime();
+//		while(p1.getX() < end) p1.advance();
+//		System.out.println("Fixed:" + (System.nanoTime() - a) / (1_000_000_000.0));
+//		double expected = PI / 4;
+//		//System.out.println(c.getY());
+//		System.out.println(c.getY() / expected - 1);
+//		System.out.println(p1.getY() / expected - 1);
+//	}
 	
 	public static double deltaRK4(DoubleBinaryOperator f, double x, double y, double step)
 	{
@@ -272,6 +272,20 @@ public class Integration
 	private static double fastFourthRoot(double x)
 	{
 		return (0.00815176 + x *(0.57294 + x *(4.94898 + x *(8.37038 + 2.16289 *x))))/(0.0310471 + x *(1.15524 + x *(6.56725 + x *(7.31 + x))));
+	}
+	
+	public static void main(String[] args)
+	{
+		double max = 0;
+		double v = 0;
+		for(double d = 1; d < 10; d += 0.0001)
+		{
+			double error = abs(fastFifthRoot(d) / pow(d, 0.2) - 1);
+			max = Math.max(max, error);
+			if(max == error) v = d;
+		}
+		System.out.println(max);
+		System.out.println(v);
 	}
 	
 	private static double fastFifthRoot(double x)
