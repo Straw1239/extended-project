@@ -1,12 +1,16 @@
 package engine;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 
 import objects.Body;
 import objects.Body.Impact;
-import utils.Utils;
+import objects.ReadableBody;
 import utils.Vector;
+import fields.Field;
 
 /**
  * Main game engine. Performs all non graphical internal calculation.
@@ -85,11 +89,15 @@ public final class Engine
 	{
 		updateObjects();
 		Vector center = Vector.ZERO;
+		List<Field> fs = new ArrayList<>();
+		for(ReadableBody b : state.objects)
+		{
+			fs.addAll(Arrays.asList(b.getFields()));
+		}
+		Field total = Field.combine(fs);
 		for(Body b : bodies)
 		{
-			Vector accel = new Vector(b).sub(center);
-			accel = accel.scale(-5 / accel.lengthSquared());
-			b.hitBy(new Impact(null, new Body.Change(Body.ACCELERATE, accel)));
+			total.applyToBody(b, 1.0 / 64);
 		}
 		updates++;
 		generateState();

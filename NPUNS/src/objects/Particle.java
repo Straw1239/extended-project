@@ -1,6 +1,7 @@
 package objects;
 
 import fields.Field;
+import fields.Gravity;
 import utils.Vector;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
@@ -27,6 +28,8 @@ public abstract class Particle extends Body
 	{
 		return new Particle(x, y, mass)
 		{
+			Field g = new Gravity(this);
+			Field[] fs = {g};
 			@Override
 			public boolean isDestroyed()
 			{
@@ -43,10 +46,12 @@ public abstract class Particle extends Body
 			@Override
 			public Field[] getFields()
 			{
-				return new Field[0];
+				return fs;
 			}
 		};
 	}
+	
+	
 	
 	public static Particle newIndestructible(double x, double y, double mass, Vector velocity)
 	{

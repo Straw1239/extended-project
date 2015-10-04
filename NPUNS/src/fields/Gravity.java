@@ -3,9 +3,10 @@ package fields;
 import objects.Body;
 import objects.Body.Impact;
 import utils.Utils;
+import utils.Vector;
 import vector.Integration;
 
-public class Gravity implements Field
+public class Gravity implements VectorField
 {
 	public static double G = 1.0;
 	
@@ -42,6 +43,12 @@ public class Gravity implements Field
 	{
 		double distance = Math.hypot(x - source.getX(), y - source.getY());
 		return G * source.mass() * (source.getY() - y) / (distance * distance * distance); 
+	}
+
+	@Override
+	public Vector force(Body b)
+	{
+		return new Vector(b).sub(new Vector(source)).normalized(G * b.mass() * source.mass() / Utils.distanceSquared(b, source));
 	}
 
 }

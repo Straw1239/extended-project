@@ -3,7 +3,7 @@ package fields;
 import objects.Body;
 import vector.Integration;
 
-public class Electric implements Field
+public class Electric implements VectorField
 {
 	
 	Body source;
